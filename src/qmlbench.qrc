@@ -1,12 +1,18 @@
-<!DOCTYPE RCC>
-<RCC version="1.0">
-  <qresource>
-    <file>Shell_SustainedFpsWithCount.qml</file>
-    <file>Shell_SustainedFpsWithStaticCount.qml</file>
-    <file>Shell_TotalFramesWithStaticCount.qml</file>
-    <file>Benchmark.qml</file>
-    <file>CreationBenchmark.qml</file>
-    <file>V8Benchmark.qml</file>
-    <file>3rdparty/v8-bench.js</file>
-  </qresource>
+<RCC>
+    <qresource prefix="/">
+        <file>Shell_SustainedFpsWithCount.qml</file>
+        <file>Shell_SustainedFpsWithStaticCount.qml</file>
+        <file>Shell_TotalFramesWithStaticCount.qml</file>
+        <file>Benchmark.qml</file>
+        <file>CreationBenchmark.qml</file>
+        <file>V8Benchmark.qml</file>
+        <file>3rdparty/v8-bench.js</file>
+        <file>shared/butterfly-collapsed.png</file>
+        <file>shared/alpha.png</file>
+        <file>shared/butterfly-half.png</file>
+        <file>shared/butterfly-wide.png</file>
+        <file>shared/Globals.qml</file>
+        <file>shared/solid.png</file>
+        <file>shared/qmldir</file>
+    </qresource>
 </RCC>
