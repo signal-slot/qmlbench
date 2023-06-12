@@ -28,9 +28,9 @@
 
 #include <QFile>
 #include <QGuiApplication>
-#include <QOpenGLContext>
-#include <QOffscreenSurface>
-#include <QOpenGLFunctions>
+//#include <QOpenGLContext>
+//#include <QOffscreenSurface>
+//#include <QOpenGLFunctions>
 #include <QDebug>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -80,50 +80,50 @@ void ResultRecorder::startResults(const QString &id)
     m_results["qt"] = QT_VERSION_STR;
     m_results["command-line"] = qApp->arguments().join(' ');
 
-    // The following code makes the assumption that an OpenGL context the GUI
-    // thread will get the same capabilities as the render thread's OpenGL
-    // context. Not 100% accurate, but it works...
-    QOpenGLContext context;
-    context.create();
-    QOffscreenSurface surface;
-    // In very odd cases, we can get incompatible configs here unless we pass the
-    // GL context's format on to the offscreen format.
-    surface.setFormat(context.format());
-    surface.create();
-    if (!context.makeCurrent(&surface)) {
-        qWarning() << "failed to acquire GL context to get version info.";
-        return;
-    }
+//    // The following code makes the assumption that an OpenGL context the GUI
+//    // thread will get the same capabilities as the render thread's OpenGL
+//    // context. Not 100% accurate, but it works...
+//    QOpenGLContext context;
+//    context.create();
+//    QOffscreenSurface surface;
+//    // In very odd cases, we can get incompatible configs here unless we pass the
+//    // GL context's format on to the offscreen format.
+//    surface.setFormat(context.format());
+//    surface.create();
+//    if (!context.makeCurrent(&surface)) {
+//        qWarning() << "failed to acquire GL context to get version info.";
+//        return;
+//    }
 
-    QOpenGLFunctions *func = context.functions();
-#if QT_VERSION >= 0x050300
-    const char *vendor = (const char *) func->glGetString(GL_VENDOR);
-    const char *renderer = (const char *) func->glGetString(GL_RENDERER);
-    const char *version = (const char *) func->glGetString(GL_VERSION);
-#else
-    Q_UNUSED(func);
-    const char *vendor = (const char *) glGetString(GL_VENDOR);
-    const char *renderer = (const char *) glGetString(GL_RENDERER);
-    const char *version = (const char *) glGetString(GL_VERSION);
-#endif
+//    QOpenGLFunctions *func = context.functions();
+//#if QT_VERSION >= 0x050300
+//    const char *vendor = (const char *) func->glGetString(GL_VENDOR);
+//    const char *renderer = (const char *) func->glGetString(GL_RENDERER);
+//    const char *version = (const char *) func->glGetString(GL_VERSION);
+//#else
+//    Q_UNUSED(func);
+//    const char *vendor = (const char *) glGetString(GL_VENDOR);
+//    const char *renderer = (const char *) glGetString(GL_RENDERER);
+//    const char *version = (const char *) glGetString(GL_VERSION);
+//#endif
 
-    if (!Options::instance.printJsonToStdout) {
-        std::cout << "ID:          " << id.toStdString() << std::endl;
-        std::cout << "OS:          " << prettyProductName.toStdString() << std::endl;
-        std::cout << "QPA:         " << QGuiApplication::platformName().toStdString() << std::endl;
-        std::cout << "GL_VENDOR:   " << vendor << std::endl;
-        std::cout << "GL_RENDERER: " << renderer << std::endl;
-        std::cout << "GL_VERSION:  " << version << std::endl;
-    }
+//    if (!Options::instance.printJsonToStdout) {
+//        std::cout << "ID:          " << id.toStdString() << std::endl;
+//        std::cout << "OS:          " << prettyProductName.toStdString() << std::endl;
+//        std::cout << "QPA:         " << QGuiApplication::platformName().toStdString() << std::endl;
+//        std::cout << "GL_VENDOR:   " << vendor << std::endl;
+//        std::cout << "GL_RENDERER: " << renderer << std::endl;
+//        std::cout << "GL_VERSION:  " << version << std::endl;
+//    }
 
-    QVariantMap glInfo;
-    glInfo["vendor"] = vendor;
-    glInfo["renderer"] = renderer;
-    glInfo["version"] = version;
+//    QVariantMap glInfo;
+//    glInfo["vendor"] = vendor;
+//    glInfo["renderer"] = renderer;
+//    glInfo["version"] = version;
 
-    m_results["opengl"] = glInfo;
+//    m_results["opengl"] = glInfo;
 
-    context.doneCurrent();
+//    context.doneCurrent();
 }
 
 void ResultRecorder::recordWindowSize(const QSize &windowSize)
